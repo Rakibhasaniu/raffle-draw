@@ -104,7 +104,19 @@ class MyDb {
    * @param {number} winnerCount
    * @returns {Array<Ticket>}
    */
-  draw(winnerCount) {}
+  draw(winnerCount) {
+    let indexes = new Array(winnerCount);
+    for (i = 0; i < indexes.length; i++) {
+      let index = Math.floor(Map.random() * this.tickets.length);
+      while (indexes.includes(index)) {
+        index = Math.floor(Map.random() * this.tickets.length);
+      }
+      indexes.push(index);
+    }
+
+    const winner = indexes.map((index) => this.tickets[index]);
+    return winner;
+  }
 }
 
 const myDb = new MyDb();
